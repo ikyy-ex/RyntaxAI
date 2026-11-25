@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content" />
+  <meta name="description" content="RYNTAX AI — Your Intelligence, Beyond Limits. Platform asisten AI cerdas berbasis Google Gemini API." />
+  <title>RYNTAX AI — Your Intelligence, Beyond Limits.</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Highlight.js & KaTeX CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/github-dark.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <!-- Mobile Backdrop -->
+    <div id="sidebarBackdrop" class="sidebar-backdrop" aria-hidden="true"></div>
+
+    <!-- SIDEBAR -->
+    <aside id="sidebar" class="sidebar" aria-label="Navigasi Utama">
+      <div class="sidebar-header">
+        <div class="brand-wrap" id="brandHomeBtn" role="button" tabindex="0">
+          <div class="ryntax-logo-glow" aria-hidden="true">
+            <svg viewBox="0 0 40 40" width="32" height="32" fill="none">
+              <defs>
+                <linearGradient id="ryntaxGrad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#3B82F6" />
+                  <stop offset="100%" stop-color="#9333EA" />
+                </linearGradient>
+              </defs>
+              <rect x="2" y="2" width="36" height="36" rx="10" fill="#0B1020" stroke="url(#ryntaxGrad)" stroke-width="2.2" />
+              <path d="M13 29V11H21.5C24.8 11 27 13 27 16.2C27 18.8 25.4 20.6 22.8 21.2L27.5 29H23.1L18.9 21.6H16.8V29H13ZM16.8 18.5H21.1C22.6 18.5 23.4 17.6 23.4 16.2C23.4 14.8 22.6 14 21.1 14H16.8V18.5Z" fill="url(#ryntaxGrad)" />
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-title">RYNTAX AI</span>
+            <span class="brand-sub">Beyond Limits</span>
+          </div>
+        </div>
+
+        <button id="closeSidebarBtn" class="icon-btn mobile-only" title="Tutup Sidebar" aria-label="Tutup Sidebar">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="sidebar-actions">
+        <button id="newChatBtn" class="btn-new-chat">
+          <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2.2">
+            <path d="M12 5v14M5 12h14" />
+          </svg>
+          <span data-i18n="newChat">Percakapan Baru</span>
+        </button>
+      </div>
+
+      <!-- Primary Navigation Tabs -->
+      <nav class="sidebar-nav" aria-label="Menu Fitur">
+        <button class="nav-item active" data-view="chat">
+          <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          </svg>
+          <span data-i18n="navChat">Chat AI</span>
+        </button>
+        <button class="nav-item" data-view="tools">
+          <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7" rx="1.5" />
+            <rect x="14" y="3" width="7" height="7" rx="1.5" />
+            <rect x="14" y="14" width="7" height="7" rx="1.5" />
+            <rect x="3" y="14" width="7" height="7" rx="1.5" />
+          </svg>
+          <span data-i18n="navTools">AI Tools</span>
+          <span class="badge-pill">12</span>
+        </button>
+        <button class="nav-item" data-view="settings">
+          <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2">
+            <circle cx="12" cy="12" r="3" />
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+          </svg>
+          <span data-i18n="navSettings">Pengaturan</span>
+        </button>
+      </nav>
+
+      <!-- History Section -->
+      <div class="history-section">
+        <div class="history-header">
+          <span data-i18n="historyTitle">Riwayat Percakapan</span>
+        </div>
+        <div class="history-search-wrap">
+          <input type="search" id="chatSearchInput" class="history-search" placeholder="Cari riwayat..." aria-label="Cari riwayat percakapan" />
+        </div>
+        <div id="chatHistoryList" class="chat-history-list">
+          <!-- Skeleton or dynamic items -->
+        </div>
+      </div>
+
+      <!-- User Account Footer -->
+      <div class="sidebar-footer">
+        <div id="guestAccountCard" class="account-card">
+          <div class="account-info">
+            <div class="avatar-circle">G</div>
+            <div>
+              <div class="account-name">Mode Tamu</div>
+              <div class="account-sub">Masuk untuk simpan riwayat</div>
+            </div>
+          </div>
+          <button id="openAuthModalBtn" class="btn-primary-sm">Masuk</button>
+        </div>
+
+        <div id="loggedInAccountCard" class="account-card hidden">
+          <div class="account-info">
+            <div id="userAvatarInitial" class="avatar-circle">R</div>
+            <div class="account-meta">
+              <div id="userDisplayName" class="account-name">Pengguna</div>
+              <div id="userDisplayEmail" class="account-sub">user@ryntax.ai</div>
+            </div>
+          </div>
+          <button id="logoutBtn" class="icon-btn" title="Keluar" aria-label="Keluar">
+            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="main-area">
+      <!-- Top Header Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="toggleSidebarBtn" class="icon-btn" title="Buka/Tutup Sidebar" aria-label="Toggle Sidebar">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+
+          <div class="model-selector-wrap">
+            <span id="apiStatusDot" class="status-dot status-checking" title="Status Koneksi API"></span>
+            <select id="modelSelect" class="model-select" aria-label="Pilih Model Gemini">
+              <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
+              <option value="gemini-2.5-pro">Gemini 2.5 Pro</option>
+              <option value="gemini-2.5-flash-lite">Gemini 2.5 Flash-Lite</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <button id="exportChatBtn" class="btn-ghost-sm" title="Unduh Percakapan (.md)">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+            </svg>
+            <span class="hide-mobile">Unduh</span>
+          </button>
+          <button id="quickThemeBtn" class="icon-btn" title="Ganti Tema Gelap/Terang" aria-label="Ganti Tema">
+            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- API Setup Warning Banner (Muncul otomatis jika GEMINI_API_KEY belum diisi) -->
+      <div id="apiSetupBanner" class="setup-banner hidden" role="alert">
+        <div class="setup-banner-content">
+          <strong>Konfigurasi API Diperlukan:</strong>
+          <span id="apiSetupText">GEMINI_API_KEY belum diatur di file <code>.env</code> server. Tambahkan API Key resmi dari Google AI Studio agar AI dapat memproses pesan.</span>
+        </div>
+        <button id="goSettingsSetupBtn" class="btn-primary-sm">Panduan Setup</button>
+      </div>
+
+      <!-- VIEW 1: CHAT AI -->
+      <section id="view-chat" class="view-section active">
+        <div id="dropZoneOverlay" class="dropzone-overlay" aria-hidden="true">
+          <div class="dropzone-box">
+            <svg viewBox="0 0 24 24" width="42" height="42" stroke="currentColor" fill="none" stroke-width="1.8">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" />
+            </svg>
+            <p>Lepaskan gambar atau dokumen di sini (Maks. 8 MB)</p>
+          </div>
+        </div>
+
+        <div id="chatScrollContainer" class="chat-scroll-container">
+          <!-- Welcome Hero -->
+          <div id="welcomeScreen" class="welcome-screen">
+            <div class="ai-orb-hero" aria-hidden="true">
+              <div class="orb-ring"></div>
+              <svg viewBox="0 0 40 40" width="44" height="44" fill="none">
+                <defs>
+                  <linearGradient id="heroGrad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#3B82F6" />
+                    <stop offset="100%" stop-color="#A855F7" />
+                  </linearGradient>
+                </defs>
+                <path d="M11 31V9H21.5C25.5 9 28 11.4 28 15.2C28 18.3 26.1 20.5 23 21.2L28.5 31H23.4L18.5 21.8H15.6V31H11ZM15.6 18.1H20.8C22.6 18.1 23.6 17 23.6 15.3C23.6 13.6 22.6 12.6 20.8 12.6H15.6V18.1Z" fill="url(#heroGrad)" />
+              </svg>
+            </div>
+            <h1 class="welcome-title">RYNTAX AI</h1>
+            <p class="welcome-tagline">Your Intelligence, Beyond Limits.</p>
+
+            <div class="starter-grid">
+              <button class="starter-card" data-prompt="Buatkan fungsi Python dan JavaScript modern untuk memvalidasi format email serta jelaskan kompleksitas waktunya.">
+                <span class="starter-tag">Coding</span>
+                <strong>Validasi Email & Kompleksitas</strong>
+                <span>Kode Python + JS modern siap pakai</span>
+              </button>
+              <button class="starter-card" data-prompt="Jelaskan konsep mekanika kuantum secara sederhana menggunakan analogi kehidupan sehari-hari.">
+                <span class="starter-tag">Edukasi</span>
+                <strong>Jelaskan Mekanika Kuantum</strong>
+                <span>Penjelasan jernih dengan analogi nyata</span>
+              </button>
+              <button class="starter-card" data-prompt="Selesaikan persamaan kuadrat $2x^2 - 7x + 3 = 0$ langkah demi langkah beserta verifikasinya.">
+                <span class="starter-tag">Matematika</span>
+                <strong>Selesaikan Persamaan Kuadrat</strong>
+                <span>Langkah demi langkah dengan rumus LaTeX</span>
+              </button>
+              <button class="starter-card" data-prompt="Berikan 5 ide aplikasi AI inovatif yang bermanfaat bagi pelajar dan UMKM di Indonesia.">
+                <span class="starter-tag">Ide & Strategi</span>
+                <strong>5 Ide Aplikasi AI Inovatif</strong>
+                <span>Konsep produk lengkap dengan target pengguna</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Messages List -->
+          <div id="messagesList" class="messages-list hidden"></div>
+        </div>
+
+        <!-- Bottom Composer -->
+        <div class="composer-wrapper">
+          <div id="attachmentPreviewBar" class="attachment-bar hidden"></div>
+
+          <form id="chatForm" class="composer-box">
+            <input type="file" id="fileInput" class="hidden" multiple accept=".png,.jpg,.jpeg,.webp,.pdf,.txt,.md,.csv,.json,.js,.ts,.py,.html,.css,.sql,.java,.cpp" />
+
+            <button type="button" id="attachFileBtn" class="icon-btn composer-btn" title="Unggah Gambar atau Dokumen" aria-label="Unggah File">
+              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2">
+                <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" />
+              </svg>
+            </button>
+
+            <textarea
+              id="promptInput"
+              class="composer-textarea"
+              rows="1"
+              placeholder="Tanyakan apa saja pada RYNTAX AI..."
+              aria-label="Tulis pesan untuk Ryntax AI"
+            ></textarea>
+
+            <button type="submit" id="sendBtn" class="btn-send" title="Kirim Pesan" aria-label="Kirim Pesan">
+              <svg viewBox="0 0 24 24" width="19" height="19" stroke="currentColor" fill="none" stroke-width="2.2">
+                <line x1="22" y1="2" x2="11" y2="13" />
+                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+              </svg>
+            </button>
+
+            <button type="button" id="stopBtn" class="btn-stop hidden" title="Hentikan AI" aria-label="Hentikan Generasi AI">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <rect x="6" y="6" width="12" height="12" rx="2" />
+              </svg>
+            </button>
+          </form>
+
+          <p class="composer-disclaimer">
+            RYNTAX AI terhubung ke Google Gemini API resmi. Verifikasi informasi penting sebelum digunakan.
+          </p>
+        </div>
+      </section>
+
+      <!-- VIEW 2: AI TOOLS (12 TOOLS) -->
+      <section id="view-tools" class="view-section">
+        <div class="page-container">
+          <div class="page-header">
+            <div>
+              <h2>RYNTAX AI Tools</h2>
+              <p>12 asisten AI terprogram dengan sistem pemrosesan khusus berbasis Google Gemini.</p>
+            </div>
+            <input type="search" id="toolsSearchInput" class="search-input-md" placeholder="Cari AI tool..." aria-label="Cari AI Tool" />
+          </div>
+
+          <div id="toolsGrid" class="tools-grid"></div>
+
+          <!-- Active Tool Workspace Modal/Drawer -->
+          <div id="toolWorkspace" class="tool-workspace hidden">
+            <div class="tool-workspace-header">
+              <div>
+                <span id="activeToolBadge" class="badge-pill">Tool Aktif</span>
+                <h3 id="activeToolTitle">AI Tool</h3>
+                <p id="activeToolDesc"></p>
+              </div>
+              <button id="closeToolWorkspaceBtn" class="btn-ghost-sm">Kembali ke Daftar Tools</button>
+            </div>
+
+            <div class="tool-workspace-body">
+              <form id="toolForm" class="tool-form">
+                <div id="toolDynamicFields" class="tool-fields"></div>
+
+                <div class="tool-file-row">
+                  <label class="file-upload-label">
+                    <input type="file" id="toolFileInput" class="hidden" accept=".png,.jpg,.jpeg,.webp,.pdf,.txt,.md,.csv,.json,.js,.ts,.py,.html,.css,.sql" />
+                    <svg viewBox="0 0 24 24" width="17" height="17" stroke="currentColor" fill="none" stroke-width="2">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" />
+                    </svg>
+                    <span id="toolFileLabel">Lampirkan Gambar / Dokumen (Opsional, Maks. 8 MB)</span>
+                  </label>
+                </div>
+
+                <div class="tool-actions-row">
+                  <button type="submit" id="runToolBtn" class="btn-primary">
+                    <span>Jalankan AI Tool</span>
+                  </button>
+                  <button type="button" id="stopToolBtn" class="btn-danger hidden">Hentikan</button>
+                </div>
+              </form>
+
+              <div class="tool-output-panel">
+                <div class="tool-output-header">
+                  <span>Hasil Pemrosesan AI</span>
+                  <div class="tool-output-actions">
+                    <button type="button" id="copyToolOutputBtn" class="btn-ghost-sm">Salin Hasil</button>
+                    <button type="button" id="downloadToolOutputBtn" class="btn-ghost-sm">Unduh .md</button>
+                  </div>
+                </div>
+                <div id="toolOutputContent" class="tool-output-content markdown-body">
+                  <p class="muted-placeholder">Hasil AI akan muncul secara real-time di sini setelah Anda menjalankan tool.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 3: SETTINGS -->
+      <section id="view-settings" class="view-section">
+        <div class="page-container settings-container">
+          <div class="page-header">
+            <div>
+              <h2>Pengaturan Sistem & Preferensi</h2>
+              <p>Kelola tampilan, perilaku model AI, keamanan privasi, dan status koneksi API.</p>
+            </div>
+          </div>
+
+          <div class="settings-grid">
+            <!-- Status API & Server -->
+            <div class="settings-card">
+              <h3>Status Koneksi API & Database</h3>
+              <p class="settings-desc">Kunci API disimpan secara aman di server (<code>.env</code>) dan tidak pernah dikirim ke browser.</p>
+              <div class="status-list">
+                <div class="status-row">
+                  <span>Google Gemini API</span>
+                  <strong id="settingsGeminiStatus">Memeriksa...</strong>
+                </div>
+                <div class="status-row">
+                  <span>Sistem Penyimpanan</span>
+                  <strong id="settingsDbStatus">Memeriksa...</strong>
+                </div>
+                <div class="status-row">
+                  <span>Model Aktif</span>
+                  <strong id="settingsActiveModel">gemini-2.5-flash</strong>
+                </div>
+              </div>
+              <div id="settingsSetupGuide" class="setup-guide-box hidden">
+                <strong>Cara Mengaktifkan Gemini API:</strong>
+                <ol>
+                  <li>Buka <code>https://aistudio.google.com/apikey</code> dan buat API Key gratis.</li>
+                  <li>Salin file <code>.env.example</code> menjadi <code>.env</code> di folder proyek.</li>
+                  <li>Isi baris <code>GEMINI_API_KEY=AIzaSy...</code> dengan API Key Anda.</li>
+                  <li>Restart server Node.js lalu klik tombol uji koneksi di bawah.</li>
+                </ol>
+              </div>
+              <button type="button" id="testConnectionBtn" class="btn-primary-sm">Uji Status Koneksi</button>
+            </div>
+
+            <!-- Tampilan & Bahasa -->
+            <div class="settings-card">
+              <h3>Tampilan & Antarmuka</h3>
+              <div class="setting-item">
+                <div>
+                  <strong>Tema Warna</strong>
+                  <span>Pilih Dark Mode futuristik atau Light Mode</span>
+                </div>
+                <select id="settingThemeSelect" class="input-select">
+                  <option value="dark">Dark Mode (Hitam & Biru Elektrik)</option>
+                  <option value="light">Light Mode</option>
+                </select>
+              </div>
+
+              <div class="setting-item">
+                <div>
+                  <strong>Bahasa Antarmuka</strong>
+                  <span>Bahasa label menu dan tombol sistem</span>
+                </div>
+                <select id="settingLanguageSelect" class="input-select">
+                  <option value="id">Bahasa Indonesia</option>
+                  <option value="en">English</option>
+                </select>
+              </div>
+
+              <div class="setting-item">
+                <div>
+                  <strong>Ukuran Teks Percakapan</strong>
+                  <span>Sesuaikan kenyamanan baca di HP atau PC</span>
+                </div>
+                <select id="settingFontSizeSelect" class="input-select">
+                  <option value="small">Kecil</option>
+                  <option value="normal" selected>Normal</option>
+                  <option value="large">Besar</option>
+                </select>
+              </div>
+
+              <div class="setting-item">
+                <div>
+                  <strong>Animasi Transisi Halus</strong>
+                  <span>Efek orb AI, streaming, dan transisi antar halaman</span>
+                </div>
+                <input type="checkbox" id="settingAnimationsToggle" class="toggle-checkbox" checked />
+              </div>
+            </div>
+
+            <!-- Preferensi Model AI -->
+            <div class="settings-card">
+              <h3>Preferensi Kecerdasan Buatan</h3>
+              <div class="setting-item">
+                <div>
+                  <strong>Model Gemini Default</strong>
+                  <span>Model yang dipilih otomatis saat membuka Ryntax AI</span>
+                </div>
+                <select id="settingModelSelect" class="input-select">
+                  <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
+                  <option value="gemini-2.5-pro">Gemini 2.5 Pro</option>
+                  <option value="gemini-2.5-flash-lite">Gemini 2.5 Flash-Lite</option>
+                </select>
+              </div>
+
+              <div class="setting-item column-item">
+                <div class="row-between">
+                  <strong>Kreativitas (Temperature): <span id="tempValueLabel">0.7</span></strong>
+                  <span>0.0 = Presisi | 1.5 = Sangat Kreatif</span>
+                </div>
+                <input type="range" id="settingTempRange" min="0" max="1.5" step="0.1" value="0.7" />
+              </div>
+
+              <div class="setting-item column-item">
+                <strong>Instruksi Khusus (Custom System Persona)</strong>
+                <textarea id="settingCustomPrompt" class="input-textarea" rows="3" placeholder="Contoh: Selalu jawab dengan ringkas, sertakan contoh kode TypeScript, dan gunakan bahasa Indonesia baku."></textarea>
+              </div>
+
+              <button type="button" id="saveSettingsBtn" class="btn-primary">Simpan Pengaturan</button>
+            </div>
+
+            <!-- Privasi & Data -->
+            <div class="settings-card">
+              <h3>Privasi & Keamanan Data</h3>
+              <p class="settings-desc">
+                Kata sandi dienkripsi dengan <code>bcrypt</code>, sesi dilindungi cookie <code>HttpOnly</code> & token CSRF, dan setiap percakapan hanya dapat diakses oleh akun pemiliknya.
+              </p>
+              <div class="privacy-actions">
+                <button type="button" id="clearAllChatsBtn" class="btn-danger">Hapus Semua Riwayat Percakapan</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- AUTH MODAL (LOGIN / REGISTER) -->
+  <div id="authModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="authModalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="authModalTitle">Masuk ke RYNTAX AI</h3>
+        <button id="closeAuthModalBtn" class="icon-btn" aria-label="Tutup">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="auth-tabs">
+        <button type="button" class="auth-tab active" data-auth-mode="login">Masuk</button>
+        <button type="button" class="auth-tab" data-auth-mode="register">Daftar Akun</button>
+      </div>
+
+      <form id="authForm" class="auth-form">
+        <div id="authNameField" class="form-group hidden">
+          <label for="authNameInput">Nama Lengkap</label>
+          <input type="text" id="authNameInput" class="input-text" placeholder="Nama Anda" />
+        </div>
+        <div class="form-group">
+          <label for="authEmailInput">Alamat Email</label>
+          <input type="email" id="authEmailInput" class="input-text" required placeholder="nama@email.com" />
+        </div>
+        <div class="form-group">
+          <label for="authPasswordInput">Kata Sandi (Min. 6 karakter)</label>
+          <input type="password" id="authPasswordInput" class="input-text" required minlength="6" placeholder="••••••••" />
+        </div>
+        <div id="authErrorMsg" class="error-box hidden"></div>
+        <button type="submit" id="authSubmitBtn" class="btn-primary full-width">Masuk Sekarang</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <!-- Libraries: Marked, DOMPurify, Highlight.js, KaTeX -->
+  <script src="https://cdn.jsdelivr.net/npm/marked@14.1.3/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.7/dist/purify.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
+  <!-- Modular App Scripts -->
+  <script src="/js/apiClient.js"></script>
+  <script src="/js/renderer.js"></script>
+  <script src="/js/toolsConfig.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
